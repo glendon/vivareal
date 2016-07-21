@@ -22,13 +22,26 @@ class SpotipposSpec extends Specification {
     def cleanup() {
     }
 
-    void "test to load provinces"() {
-    	when : "there is provinces to be loaded"    	    		    		
+    void "test to get provincy with success"() {
+    	when : "load a provincy by name"    	    		    		
         	def provincy = spotippos.getProvincy("Gode")        	
-        then : "verify is there are 6 provinces"
+        then : "verify if there are values"
         	provincy
         	provincy.name == "Gode"
         	provincy.boundaries.upperLeft.x == 0
         	provincy.boundaries.upperLeft.y == 1000
+    }
+
+    void "test fail to get provincy when there is no area"() {
+    	when : "load a provincy by name and there is no area"    	    		    		
+        	spotippos.area = null
+        then : "it tails when try to get the provincy"
+        	shouldFail(RuntimeException) { spotippos.getProvincy("Gode") }
+    }
+
+    void "test fail when the name isn't informed"() {
+    	when : "try to call in valid spotippos object"    
+        then : "fail whe the provincy name is null"
+        	shouldFail(IllegalArgumentException) { spotippos.getProvincy(null) }
     }
 }

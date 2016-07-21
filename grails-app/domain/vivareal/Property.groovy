@@ -21,6 +21,11 @@ class Property {
         beds max: 5, min: 1, nullable: true
         baths max: 4, min: 1, nullable: true
 		squareMeters max: 240 as Float, min:20 as Float
+
+        x nullable: true
+        y nullable: true
+        price nullable: true
+        description nullable: true
     }
 
     static mapping = {

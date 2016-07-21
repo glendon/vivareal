@@ -1,7 +1,5 @@
 package vivareal
 
-import org.bson.types.ObjectId
-
 class Property {
 
 	static mapWith = "mongo"

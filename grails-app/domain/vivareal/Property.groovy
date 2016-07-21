@@ -6,7 +6,7 @@ class Property {
 
 	static mapWith = "mongo"
 
-	ObjectId id
+	String id
     Integer x
     Integer y
     String title
@@ -21,5 +21,9 @@ class Property {
         beds max: 5, min: 1, nullable: true
         baths max: 4, min: 1, nullable: true
 		squareMeters max: 240 as Float, min:20 as Float
+    }
+
+    static mapping = {
+        id generator : 'uuid2'
     }
 }

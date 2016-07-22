@@ -10,7 +10,7 @@ class ProvincesServiceSpec extends Specification {
 
     def setup() {
       provincesService = new ProvincesService()
-      provincesService.loadProvincesFromVivaReal()
+      provincesService.provinces = new VivaRealIntegrationService().loadProvincesFromVivaReal()
     }
 
     def cleanup() {

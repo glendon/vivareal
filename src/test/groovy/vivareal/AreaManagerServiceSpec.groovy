@@ -30,13 +30,4 @@ class AreaManagerServiceSpec extends Specification {
    		then : "verify if the result is true"
    			valid
    	}
-
-    
-    //apagar isso aqui
-    void "test "() {
-      when : "ask"
-        areaManagerService.loadPropertiesFromVivaReal()
-      then : "verify if the result ise"
-        true
-    } 
 }

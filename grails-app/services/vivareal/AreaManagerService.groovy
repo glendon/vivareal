@@ -46,21 +46,6 @@ class AreaManagerService {
         def properties = Property.where {(x >= upperLeftX && x <= bottomRightX && y >= bottomRightY && y <= upperLeftY)}.list()
 
         properties
-    }
-
-    def loadPropertiesFromVivaReal() {
-        def properties =  []
-
-        def jsonDefault = new groovy.json.JsonSlurper()
-            .parseText('https://raw.githubusercontent.com/VivaReal/code-challenge/master/properties.json'.toURL().text)
-
-        def propertiesJson = new PropertiesJson(jsonDefault)    
-
-        def property
-        propertiesJson.properties.each { tempProperty ->        
-            property = new Property(tempProperty.baths, tempProperty.beds, tempProperty.id, tempProperty.squareMeters, tempProperty.x, tempProperty.y)
-            properties.add(property) 
-        }                      
-    }
+    }    
 
 }

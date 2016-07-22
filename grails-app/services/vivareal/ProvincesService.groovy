@@ -52,18 +52,4 @@ class ProvincesService {
     	validateX && validateY	
     }
 
-    def loadProvincesFromVivaReal() {
-    	provinces =  []
-
-    	def jsonDefault = new groovy.json.JsonSlurper()
-    		.parseText('https://raw.githubusercontent.com/VivaReal/code-challenge/master/provinces.json'.toURL().text)
-
-    	def provincy
-		jsonDefault.entrySet().each {entry ->
-			provincy = new Provincy(entry.value)            
-			provincy.name = entry.key            
-			provinces.add(provincy)
-		}
-    }
-
 }

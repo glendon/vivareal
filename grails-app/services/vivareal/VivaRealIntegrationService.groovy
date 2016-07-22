@@ -1,5 +1,6 @@
 package vivareal
 
+import org.springframework.transaction.annotation.Transactional
 
 class VivaRealIntegrationService {
 	
@@ -11,6 +12,7 @@ class VivaRealIntegrationService {
         properties.each{ propertyVivaReal ->
             
             propertyVivaReal.title = "Imóvel $propertyVivaReal.id"
+
             propertyVivaReal.save(flush:true, failOnError:true)
         }
     }

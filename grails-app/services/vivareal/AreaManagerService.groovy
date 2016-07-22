@@ -23,7 +23,7 @@ class AreaManagerService {
 
     def allocatingArea (Property property) {
     	if (isAreaValid(property.x, property.y)){
-    			def provinces = provincesService.getProvinces(x, y)
+    			def provinces = provincesService.getProvinces(property.x, property.y)
 				
 				def freeArea = false;
 				provinces.each {provincy ->
@@ -31,7 +31,7 @@ class AreaManagerService {
 				}
 
 				if (freeArea) {
-					property.provinces = provinces	
+					property.setProvinces(provinces)	
 				}else{
 					throw new IllegalArgumentException("The selected area is occupied, change the x and/or y values.")	
 				}
@@ -39,6 +39,15 @@ class AreaManagerService {
     		}else{
     			throw new IllegalArgumentException("The selected area is invalid, change the x and/or y values.")
     		}
+    }
+
+    def createNew(Property property) {
+        try {
+            allocatingArea(property)
+            property.save(flush:true, failOnError:true)
+        } catch (Exception e) {
+            throw e
+        } 
     }
 
     def getAllPropertysIn(upperLeftX, upperLeftY, bottomRightX, bottomRightY) {

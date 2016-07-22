@@ -10,6 +10,8 @@ import static org.springframework.http.HttpMethod.*
 @Transactional(readOnly = true)
 class PropertyController extends RestfulController {
 
+    def areaManagerService
+
 	static namespace = 'v1'
     static responseFormats = ['json']
     PropertyController() {
@@ -36,9 +38,10 @@ class PropertyController extends RestfulController {
             respond property.errors, [status: UNPROCESSABLE_ENTITY]
         }
         else {
+            areaManagerService.createNew(property)
+
             //TODO apply where the resource was created. my url.
             log.info "PROPERTY >>> The resource was created"
-            property.save flush:true
 
             respond property, [status: CREATED]
         }

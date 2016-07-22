@@ -26,10 +26,10 @@ class Provincy {
 	*/
 
 	def isAreaAvailable (paramX, paramY) {
-		def property = Property.where {(x == paramX && y == paramY)}.list()
+		def properties = Property.where {(x == paramX && y == paramY)}.list()
 
 		//To make the code more understandable
-		return property == null
+		return properties.size() == 0
 	}
 
 }

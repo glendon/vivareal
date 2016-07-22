@@ -15,7 +15,7 @@ class Property {
     Integer beds
     Integer baths
     Float squareMeters 
-    static def provinces
+    def provinces
 
     static constraints = {
         title blank:false
@@ -45,5 +45,13 @@ class Property {
         this.squareMeters = squareMeters
         this.x = x
         this.y = y
+    }
+
+    def setProvinces(provinces) {
+        this.provinces = []
+
+        provinces.each { provincy ->
+            this.provinces.add(provincy.name)
+        }
     }
 }

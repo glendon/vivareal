@@ -8,18 +8,24 @@ hibernate:
 
 environments:
     development:
+        bootstrap:
+            load:
+                properties : true
         grails:
             mongodb:
                 host: "localhost"
                 port: 27017
                 databaseName: "vivareal"      
-    test:
+    test:        
         grails:   
             mongodb:
                 host: "localhost"
                 port: 27017
                 databaseName: "vivarealtest"
     production:
+        bootstrap:
+            load:
+                properties : true
         grails:           
             mongodb:
                 host: "localhost"

@@ -4,9 +4,11 @@ package vivareal
 class ProvincesService {
 
     def provinces
+    def vivaRealIntegrationService
 
     def loadProvinces = {
-		provinces = Property.list()    	
+		//provinces = Property.list()    	
+        provinces = vivaRealIntegrationService.loadProvincesFromVivaReal()
     }
 
     Provincy getProvincy(name) {
@@ -25,7 +27,7 @@ class ProvincesService {
      	}
 
      	if (province.size() > 1) {
-     		throw new RuntimeException("Somethin went wrong, it's not permited to exist to Provinces with the same name")
+     		throw new RuntimeException("Somethin went wrong, it's not permited to exist two Provinces with the same name")
      	}
 
      	province.size() == 1 ? province[0] : null;

@@ -15,6 +15,17 @@ class VivaRealIntegrationService {
         }
     }
 
+    /*def insertProvincesFromVivaReal(){
+
+        def provinces = loadProvincesFromVivaReal()
+        log.debug(">>> Saving  $provinces.size provinces")
+
+        provinces.each{ provincyVivaReal ->
+                        
+            provincyVivaReal.save(flush:true, failOnError:true)
+        }
+    }*/
+
     def loadPropertiesFromVivaReal() {
         def properties =  []
 

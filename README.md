@@ -25,23 +25,4 @@ Como executar o projeto:
                 port: 27017
                 databaseName: "vivarealtest"
                 
-3 - grails run-app.
-
-
-** A classe BootStrap popula os dados necessários da aplicação, pegando os jsons diretamente do github da VivaReal, por isso não é necessário nenhum passo a mais.
-
-Url mappings:
-
-
- |   POST   | /properties            | Action: save             |
- 
- |   GET    | /properties            | Action: index            |
- 
- |   GET    | /properties/${id}      | Action: show             |
-
-
-
-O GET /properties aceita os parâmetros: 
-
-
-  /properties?ax={integer}&ay={integer}&bx={integer}&by={integer}
+3 - Execute na raiz do projeto: grails run-app

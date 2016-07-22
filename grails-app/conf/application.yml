@@ -112,4 +112,10 @@ grails:
     mongodb:
         host: "localhost"
         port: 27017
-        databaseName: "vivareal"    
+        databaseName: "vivareal"   
+---
+---
+ spotippos:
+    limit:
+        x: 1400
+        y: 1000

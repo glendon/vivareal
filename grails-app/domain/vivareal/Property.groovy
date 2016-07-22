@@ -13,6 +13,7 @@ class Property {
     Integer beds
     Integer baths
     Float squareMeters 
+    def provinces
 
     static constraints = {
         title blank:false

@@ -10,6 +10,6 @@ class ApplicationController implements PluginManagerAware {
     GrailsPluginManager pluginManager
 
     def index() {
-        [grailsApplication: grailsApplication, pluginManager: pluginManager]
+        respond ["messagem" : "Desafio back-end"]
     }
 }

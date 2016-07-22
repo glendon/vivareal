@@ -19,7 +19,6 @@ class PropertyController extends RestfulController {
     //GET /properties
     def index () {
         log.info "PROPERTY >>> Executing HTTP GET"
-        //TODO arrumar o id, arrumar um id melhor para ser exibido e nao retornar o _id do mongo.
         
         respond Property.list()
     }

@@ -60,8 +60,8 @@ class ProvincesService {
 
     	def provincy
 		jsonDefault.entrySet().each {entry ->
-			provincy = new Provincy(entry.value)
-			provincy.name = entry.key
+			provincy = new Provincy(entry.value)            
+			provincy.name = entry.key            
 			provinces.add(provincy)
 		}
     }

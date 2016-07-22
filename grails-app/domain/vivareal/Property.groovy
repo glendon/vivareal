@@ -13,7 +13,7 @@ class Property {
     Integer beds
     Integer baths
     Float squareMeters 
-    def provinces
+    static def provinces
 
     static constraints = {
         title blank:false
@@ -29,5 +29,14 @@ class Property {
 
     static mapping = {
         id generator : 'uuid2'
+    }
+
+    Property(baths, beds, id, squareMeters, x, y) {
+        this.baths = baths
+        this.beds = beds
+        this.id = id
+        this.squareMeters = squareMeters
+        this.x = x
+        this.y = y
     }
 }

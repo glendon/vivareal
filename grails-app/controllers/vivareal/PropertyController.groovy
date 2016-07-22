@@ -19,10 +19,25 @@ class PropertyController extends RestfulController {
     }
 
     //GET /properties
+    //properties?ax={integer}&ay={integer}&bx={integer}&by={integer}
     def index () {
+
+        Integer ax = params.int("ax")
+        Integer ay = params.int("ay")
+        Integer bx = params.int("bx")
+        Integer by = params.int("by")
+
         log.info "PROPERTY >>> Executing HTTP GET"
         
-        respond Property.list()
+        if (ax != null && ay != null && bx != null && by != null) {
+
+            def properties = areaManagerService.getAllPropertysIn(ax, ay, bx, by)
+            respond properties
+        }else{
+            respond Property.list()
+        }
+
+        
     }
 
     //POST /properties
@@ -40,15 +55,14 @@ class PropertyController extends RestfulController {
         else {
             areaManagerService.createNew(property)
 
-            //TODO apply where the resource was created. my url.
             log.info "PROPERTY >>> The resource was created"
-
             respond property, [status: CREATED]
         }
     }
 
     //GET /properties/${id}    
     def show (Long id) {
+        log.info "PROPERTY >>> Geting the resource $id"
         def property = Property.findById(id)
 
         if (property) {
@@ -58,6 +72,7 @@ class PropertyController extends RestfulController {
         }
     }
 
+    /*
     //PUT /properties/${id}
     @Transactional
     def update () {
@@ -68,5 +83,6 @@ class PropertyController extends RestfulController {
     @Transactional
     def delete () {
     }
+    */
 
 }

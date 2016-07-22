@@ -3,6 +3,17 @@ package vivareal
 
 class VivaRealIntegrationService {
 	
+    def insertPropertiesFromVivaReal(){
+
+        def properties = loadPropertiesFromVivaReal()
+        log.debug(">>> Saving  $properties.size properties")
+
+        properties.each{ propertyVivaReal ->
+            
+            propertyVivaReal.title = "Imóvel $propertyVivaReal.id"
+            propertyVivaReal.save(flush:true, failOnError:true)
+        }
+    }
 
     def loadPropertiesFromVivaReal() {
         def properties =  []

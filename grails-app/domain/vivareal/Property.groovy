@@ -1,10 +1,12 @@
 package vivareal
 
+import grails.util.Environment
+
 class Property {
 
 	static mapWith = "mongo"
 
-	String id
+	Long id
     Integer x
     Integer y
     String title
@@ -28,7 +30,12 @@ class Property {
     }
 
     static mapping = {
-        id generator : 'uuid2'
+        if (Environment.current == Environment.TEST) {
+            id generator : 'assigned' 
+        }else{
+            id generator : 'increment'
+        }
+        
     }
 
     Property(baths, beds, id, squareMeters, x, y) {

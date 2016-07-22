@@ -45,7 +45,14 @@ class PropertyController extends RestfulController {
     }
 
     //GET /properties/${id}    
-    def show (Integer id) {
+    def show (Long id) {
+        def property = Property.findById(id)
+
+        if (property) {
+            respond property, [status : OK]
+        }else {
+            render  status : NOT_FOUND
+        }
     }
 
     //PUT /properties/${id}

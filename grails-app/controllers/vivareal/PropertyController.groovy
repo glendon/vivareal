@@ -54,9 +54,17 @@ class PropertyController extends RestfulController {
         }
         else {
             areaManagerService.createNew(property)
+            
+            if (property.hasErrors()){
+                log.info "PROPERTY >>> There was some validation problem"
+                transactionStatus.setRollbackOnly()
+                respond property.errors, [status: UNPROCESSABLE_ENTITY]
+            }else{
+                log.info "PROPERTY >>> The resource was created"
+                respond property, [status: CREATED]
+            }
 
-            log.info "PROPERTY >>> The resource was created"
-            respond property, [status: CREATED]
+            
         }
     }
 

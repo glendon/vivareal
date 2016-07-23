@@ -1,5 +1,6 @@
-package vivareal
+package vivareal.services.spotippos
 
+import vivareal.domain.Provincy
 
 class ProvincesService {
 
@@ -7,9 +8,13 @@ class ProvincesService {
     def vivaRealIntegrationService
 
     def loadProvinces = {
-		//provinces = Property.list()    	
-        provinces = vivaRealIntegrationService.loadProvincesFromVivaReal()
+		provinces = Provincy.list()    	
     }
+
+    /*@PostConstruct
+    def init() {
+      // GORM accesible from here
+    }*/
 
     Provincy getProvincy(name) {
 
@@ -35,21 +40,17 @@ class ProvincesService {
     }
 
     def getProvinces(x, y) {
-    	
-    	def provincesInTheArea = provinces.findAll { provincy ->     
-    		verifyPosition(provincy.boundaries, x, y) 
+
+    	def provincesInTheArea = provinces.findAll { provincy ->                 
+    		verifyPosition(provincy, x, y) 
     	}
     	provincesInTheArea
     }
 
-    private boolean verifyPosition(boundaries, x, y) {
-		if (!boundaries){
-    		log.error ">>> Boundaries can't be null"
-    		throw new RuntimeException("Boundaries can't be null")
-    	}    	
-    	
-    	def validateY = (boundaries.bottomRight.y <= y) && (y <= boundaries.upperLeft.y)
-    	def validateX = (boundaries.upperLeft.x <= x) && (x <= boundaries.bottomRight.x)    	
+    private boolean verifyPosition(provincy, x, y) { 	
+
+    	def validateY = (provincy.bottomRightY <= y) && (y <= provincy.upperLeftY)
+    	def validateX = (provincy.upperLeftX <= x) && (x <= provincy.bottomRightX)        
 
     	validateX && validateY	
     }

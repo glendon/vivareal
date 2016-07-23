@@ -1,11 +1,12 @@
 package vivareal.v1
 
-import vivareal.*
 import grails.transaction.Transactional
 import grails.rest.*
 import grails.converters.*
 import static org.springframework.http.HttpStatus.*
 import static org.springframework.http.HttpMethod.*
+
+import vivareal.domain.Property
 
 @Transactional(readOnly = true)
 class PropertyController extends RestfulController {

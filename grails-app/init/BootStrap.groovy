@@ -1,23 +1,21 @@
+import vivareal.services.bootstrap.DataService
+import vivareal.domain.Property
+import vivareal.domain.Provincy
 
-import vivareal.*
 import grails.util.Environment
 
 class BootStrap {
 
-	def vivaRealIntegrationService
-    def provincesService
+	def dataService
 
-    def init = { servletContext ->
-
-        provincesService.loadProvinces()
-
-    	if (Environment.current == Environment.TEST) {
-           vivaRealIntegrationService.insertPropertiesFromVivaReal()           
-	    }
+    def init = { servletContext ->        
+        dataService.loadApplicationData()
+       
     }
     def destroy = {
     	if (Environment.current == Environment.TEST) {
             Property.where { }.deleteAll()
+            Provincy.where { }.deleteAll()
         }
     }
 }

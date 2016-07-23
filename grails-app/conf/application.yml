@@ -9,8 +9,9 @@ hibernate:
 environments:
     development:
         bootstrap:
-            load:
-                properties : true
+            insert:
+                properties : false
+                provinces : true
         grails:
             mongodb:
                 host: "localhost"
@@ -24,8 +25,9 @@ environments:
                 databaseName: "vivarealtest"
     production:
         bootstrap:
-            load:
-                properties : true
+            insert:
+                properties : false
+                provinces : true
         grails:           
             mongodb:
                 host: "localhost"

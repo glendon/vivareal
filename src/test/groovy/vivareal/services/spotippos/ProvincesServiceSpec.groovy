@@ -1,7 +1,9 @@
-package vivareal
+package vivareal.services.spotippos
 
 import grails.test.mixin.TestFor
 import spock.lang.Specification
+
+import vivareal.services.integration.VivaRealIntegrationService
 
 @TestFor(ProvincesService)
 class ProvincesServiceSpec extends Specification {
@@ -10,12 +12,19 @@ class ProvincesServiceSpec extends Specification {
 
     def setup() {
       provincesService = new ProvincesService()
-      provincesService.provinces = new VivaRealIntegrationService().loadProvincesFromVivaReal()
+      provincesService.provinces = new VivaRealIntegrationService().provincesFromVivaReal()
     }
 
     def cleanup() {
     }
 
+     void "test frontiers"() {
+      when : "ask for a province from a valid coordinates in a frontier of 3 provinces"
+        def provinces = provincesService.getProvinces(410, 500)
+      
+      then : "verify if it is 3"
+        provinces.size() == 3
+    }
 
    void "test answer which province some area belongs to"() {
    		when : "ask for a province from a valid coordinates"

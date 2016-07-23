@@ -1,9 +1,10 @@
-package vivareal
-
+package vivareal.services.spotippos
 
 import grails.test.mixin.integration.Integration
 import grails.transaction.*
 import spock.lang.*
+
+import vivareal.domain.Property
 
 @Integration
 @Rollback

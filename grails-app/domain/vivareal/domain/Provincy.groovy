@@ -2,7 +2,6 @@ package vivareal.domain
 
 class Provincy {
 
-	static mapWith = "mongo"
 
 	Long id
 	String name

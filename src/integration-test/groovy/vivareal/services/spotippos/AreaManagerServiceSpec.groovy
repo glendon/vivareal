@@ -26,7 +26,7 @@ class AreaManagerServiceSpec extends Specification {
     }
 
     def cleanup() {
-        Property.where { id == 9999 }.deleteAll()
+        Property.where { id == 9999L }.deleteAll()
     }
 
     void "test insert a new property and find it in search by area"(){

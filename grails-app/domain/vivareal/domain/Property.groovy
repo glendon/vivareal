@@ -4,8 +4,6 @@ import grails.util.Environment
 
 class Property {
 
-	static mapWith = "mongo"
-
 	Long id
     Integer x
     Integer y

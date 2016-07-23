@@ -13,9 +13,5 @@ class BootStrap {
        
     }
     def destroy = {
-    	if (Environment.current == Environment.TEST) {
-            Property.where { }.deleteAll()
-            Provincy.where { }.deleteAll()
-        }
     }
 }

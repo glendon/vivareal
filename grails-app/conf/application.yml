@@ -104,3 +104,6 @@ grails:
     limit:
         x: 1400
         y: 1000
+    url:
+        provinces: https://raw.githubusercontent.com/VivaReal/code-challenge/master/provinces.json
+        properties: https://raw.githubusercontent.com/VivaReal/code-challenge/master/properties.json

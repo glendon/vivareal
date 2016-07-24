@@ -4,15 +4,19 @@ import grails.test.mixin.integration.Integration
 import grails.transaction.*
 import spock.lang.*
 
+import grails.core.GrailsApplication
+
 import vivareal.domain.Property
 
 @Integration
 @Rollback
-class AreaManagerServiceSpec extends Specification {	
 
-    def areaManagerService
+class PropertyFinderInAreaServiceSpec extends Specification {
 
+	def propertyFinderInAreaService
+	
     def setupSpec() {
+
         def tempProperty = new Property()        
         tempProperty.title = "Property test x1399 y999"       
         tempProperty.beds = 1
@@ -24,30 +28,35 @@ class AreaManagerServiceSpec extends Specification {
         tempProperty.save(flush:true, failOnError:true)
     }
 
+    def setup() {    	
+    }
+
     def cleanup() {
         Property.where { title == "Property test x1399 y999" }.deleteAll()
     }
 
     void "test insert a new property and find it in search by area"(){
-        when : "insert a new property search for it in a specific area"            
+        when : "insert a new property search for it in a specific area"                        
 
-            def propertiesInArea = areaManagerService.getAllPropertysIn(1380, 999, 1399, 950)
+            def response = propertyFinderInAreaService.whenUpperLeftXIs(1380).andUpperLeftYIs(999)
+            .andBottomRightXIs(1399).andBottomRightYIs(950).returnPropertiesInArea()
 
-            def properties = propertiesInArea.findAll { property ->
+            def properties = response.properties.findAll { property ->
                 property.title = "Property test x1399 y999"
             }
 
         then: "verify if the property was found"  
             properties
-            properties[0].title == "Property test x1399 y999"  
-        
+            properties[0].title == "Property test x1399 y999"          
     }
 
     void "test can't find the new property"(){
-        when : "search in another position"
-            def propertiesInArea = areaManagerService.getAllPropertysIn(1380, 997, 1397, 950)
+        when : "search in another position"            
 
-            def properties = propertiesInArea.findAll { property ->
+            def response = propertyFinderInAreaService.whenUpperLeftXIs(1380).andUpperLeftYIs(997)
+            .andBottomRightXIs(1397).andBottomRightYIs(950).returnPropertiesInArea()
+
+            def properties = response.properties.findAll { property ->
                 property.title == "Property test x1399 y999"
             }
         then : "can't be found"   
@@ -57,9 +66,11 @@ class AreaManagerServiceSpec extends Specification {
     void "test try to recovering all properties"() {
 
         when : "ask for properties in the whole area"
-            def properties = areaManagerService.getAllPropertysIn(0, 1000, 14000, 0)
+
+            def response = propertyFinderInAreaService.whenUpperLeftXIs(0).andUpperLeftYIs(1000)
+            .andBottomRightXIs(1400).andBottomRightYIs(0).returnPropertiesInArea()
             
         then : "verify if the quantity returned is the total of properties stored"
-            properties.size() == Property.list().size()
+            response.foundProperties == Property.list().size()
     }
 }

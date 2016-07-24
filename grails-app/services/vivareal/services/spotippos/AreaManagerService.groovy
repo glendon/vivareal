@@ -19,30 +19,8 @@ class AreaManagerService {
     @Value('${spotippos.limit.y}')
     Integer yLimit
 
-    def isAreaValid(x, y) {
-    	x <= xLimit && y <= yLimit
-    }    
-
     def createNew(property) {
-        
-        if (isAreaValid(property.x, property.y)){
-            def provinces = provincesService.getProvinces(property.x, property.y)
-                
-            property.addListProvinces(provinces)                    
-        }else{                
-            property.errors.reject("property.insert.invalid.area")
-        }   
-
-        if (!property.hasErrors()){            
-            property.insert(flush:true, failOnError:true)
-        }        
+        property.isInValid(xLimit).and(yLimit).thenAddListProvinces(provincesService).thenInsert()
     }
-
-    def getAllPropertysIn(upperLeftX, upperLeftY, bottomRightX, bottomRightY) {
-
-        def properties = Property.where {(x >= upperLeftX && x <= bottomRightX && y >= bottomRightY && y <= upperLeftY)}.list()
-
-        properties
-    }    
 
 }

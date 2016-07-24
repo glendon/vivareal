@@ -18,6 +18,9 @@ class Property {
     Float squareMeters 
     static hasMany = [provinces:Provincy]
 
+    static transients = ['inValidPosition']
+    def inValidPosition
+
     static constraints = {
         title blank:false
         beds max: 5, min: 1, nullable: true
@@ -78,5 +81,43 @@ class Property {
         provincesParam.each { provincy ->        
             this.provinces.add(provincy)
         }
+    }
+
+
+    def isInValid(xLimit) {
+        inValidPosition = x <= xLimit
+
+        this
+    }
+
+    def and(yLimit) {
+        inValidPosition = inValidPosition && (y <= yLimit)
+
+        if (!inValidPosition) {
+            this.errors.reject("property.insert.invalid.area")
+        }      
+
+        this 
+    }
+
+    def thenAddListProvinces(provincesService) {
+        if (!this.provinces) {
+            this.provinces = []
+        }            
+
+        provincesService.getProvinces(x, y).each { provincy ->        
+            this.provinces.add(provincy)
+        }
+
+        this
+    }
+
+    def thenInsert() {
+
+        if (!this.hasErrors()){            
+            this.insert(flush:true, failOnError:true)
+        } 
+
+        this
     }
 }

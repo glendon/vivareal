@@ -111,4 +111,29 @@ class PropertySpec extends Specification {
         	!property.hasErrors()        
     }
 
+    void "test inform when is a invalid area"() {
+        when : "ask if it is a invalid coordinates"
+            def xLimit = 1400
+            def yLimit = 1000
+
+            property.x = 2000
+            property.y = 2000 
+            property.isInValid(xLimit).and(yLimit)
+
+        then : "verify if has errors"
+            property.hasErrors()
+    }
+
+    void "test inform when is a valid area"() {
+        when : "ask if it is a valid coordinates"
+            def xLimit = 1400
+            def yLimit = 1000
+
+            property.x = 500
+            property.y = 600
+            property.isInValid(xLimit).and(yLimit)
+        then : "verify if the result is true"
+            !property.hasErrors()
+    }
+
 }

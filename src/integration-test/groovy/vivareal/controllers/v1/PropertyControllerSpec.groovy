@@ -14,9 +14,11 @@ import vivareal.domain.Property
 class PropertyControllerSpec extends Specification {
 
 	def areaManagerService
+    def propertyFinderInAreaService
 
     def setup() {
     	controller.areaManagerService = areaManagerService
+        controller.propertyFinderInAreaService = propertyFinderInAreaService
     }
 
     def cleanup() {

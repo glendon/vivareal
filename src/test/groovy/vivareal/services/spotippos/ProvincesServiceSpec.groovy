@@ -12,7 +12,10 @@ class ProvincesServiceSpec extends Specification {
 
     def setup() {
       provincesService = new ProvincesService()
-      provincesService.provinces = new VivaRealIntegrationService().provincesFromVivaReal()
+
+      def vivaRealIntegrationService = new VivaRealIntegrationService()
+      vivaRealIntegrationService.provincesJsonUrl = 'https://raw.githubusercontent.com/VivaReal/code-challenge/master/provinces.json'
+      provincesService.provinces = vivaRealIntegrationService.provincesFromVivaReal()
     }
 
     def cleanup() {
@@ -41,31 +44,4 @@ class ProvincesServiceSpec extends Specification {
         provinces[0].name == "Gode" || provinces[0].name == "Ruja"
         provinces[1].name == "Gode" || provinces[1].name == "Ruja"
    	}    
-
-   	void "test to get provincy with success"() {
-    	when : "load a provincy called Gode"    	    		    		
-        	def provincy = provincesService.getProvincy("Gode")        	
-        then : "verify if there are values"
-        	provincy
-        	provincy.name == "Gode"        	
-
-        when : "load a provincy called Jaby"    	    		    		
-        	provincy = provincesService.getProvincy("Jaby")        	
-        then : "verify if there are values"
-        	provincy
-        	provincy.name == "Jaby"
-    }    
-
-    void "test fail when the name isn't informed"() {
-    	when : "try to call in valid spotippos object"       		    		
-        then : "fail whe the provincy name is null"
-        	shouldFail(IllegalArgumentException) { provincesService.getProvincy(null) }
-    }
-
-    void "test fail to get provincy when there is no area"() {
-      when : "load a provincy by name and there is no area"                     
-          provincesService.provinces = null
-        then : "it tails when try to get the provincy"
-          shouldFail(RuntimeException) { provincesService.getProvincy("Gode") }
-    }
 }

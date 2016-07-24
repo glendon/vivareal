@@ -12,6 +12,7 @@ import vivareal.domain.Property
 class PropertyController extends RestfulController {
 
     def areaManagerService
+    def propertyFinderInAreaService
 
 	static namespace = 'v1'
     static responseFormats = ['json']
@@ -28,21 +29,10 @@ class PropertyController extends RestfulController {
         Integer bx = params.int("bx")
         Integer by = params.int("by")
 
-        log.info "PROPERTY >>> Executing HTTP GET"
-        
-        def properties
-        def response
-        if (ax != null && ay != null && bx != null && by != null) {
+        log.info "PROPERTY >>> Executing HTTP GET"                
 
-            properties = areaManagerService.getAllPropertysIn(ax, ay, bx, by)
-            response = [foundProperties : properties.size(), properties : properties]
-            respond response
-        }else{
-            properties = Property.list()
-            response = [foundProperties : properties.size(), properties : properties]
-            respond response
-        }
-
+        respond propertyFinderInAreaService.whenUpperLeftXIs(ax).andUpperLeftYIs(ay)
+            .andBottomRightXIs(bx).andBottomRightYIs(by).returnPropertiesInArea()
         
     }
 
@@ -53,34 +43,22 @@ class PropertyController extends RestfulController {
 
         def property = new Property(request.JSON)
         
-        if(property.hasErrors()) {
-            log.info "PROPERTY >>> There was some validation problem"
+        areaManagerService.createNew(property)
+        
+        if (property.hasErrors()){
+            log.info "PROPERTY >>> There was some validation problems"
             transactionStatus.setRollbackOnly()
             respond property.errors, [status: UNPROCESSABLE_ENTITY]
-        }
-        else {
-            areaManagerService.createNew(property)
-            
-            if (property.hasErrors()){
-                log.info "PROPERTY >>> There was some validation problem"
-                transactionStatus.setRollbackOnly()
-                respond property.errors, [status: UNPROCESSABLE_ENTITY]
-            }else{
-                log.info "PROPERTY >>> The resource was created"
-                respond property, [status: CREATED]
-            }
-
-            
+        }else{
+            log.info "PROPERTY >>> The resource was created"
+            respond property, [status: CREATED]
         }
     }
 
     //GET /properties/${id}    
     def show (Long id) {
-        log.info "PROPERTY >>> Geting the resource $id"
-        def property = Property.findById(id)
-        println "Id quesisado $id"            
-        println property 
-        println property as grails.converters.JSON
+        
+        def property = Property.findById(id)        
 
         if (property) {
             respond property, [status : OK]
@@ -88,18 +66,5 @@ class PropertyController extends RestfulController {
             render  status : NOT_FOUND
         }
     }
-
-    /*
-    //PUT /properties/${id}
-    @Transactional
-    def update () {
-
-    }
-    
-    //DELETE  /properties/${id}
-    @Transactional
-    def delete () {
-    }
-    */
 
 }

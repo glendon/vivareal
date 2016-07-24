@@ -1,13 +1,21 @@
 package vivareal.services.integration
 
 import vivareal.integration.model.*
+import org.springframework.beans.factory.annotation.*
 
-class VivaRealIntegrationService {    
+class VivaRealIntegrationService {
+
+    @Value('${spotippos.url.properties}')
+    String propertiesJsonUrl
+    
+    @Value('${spotippos.url.provinces}')
+    String provincesJsonUrl    
 
     def propertiesFromVivaReal() {
+        println "propertiesFromVivaReal: " + propertiesJsonUrl
 
         def jsonDefault = new groovy.json.JsonSlurper()
-            .parseText('https://raw.githubusercontent.com/VivaReal/code-challenge/master/properties.json'.toURL().text)
+            .parseText(propertiesJsonUrl.toURL().text)
 
         def propertiesJson = new PropertiesJson(jsonDefault)    
 
@@ -16,9 +24,9 @@ class VivaRealIntegrationService {
 
     def provincesFromVivaReal() {
     	def provinces =  []
-
+        println "provincesFromVivaReal: " + provincesJsonUrl
     	def jsonDefault = new groovy.json.JsonSlurper()
-    		.parseText('https://raw.githubusercontent.com/VivaReal/code-challenge/master/provinces.json'.toURL().text)
+    		.parseText(provincesJsonUrl.toURL().text)
 
     	def provincy
 		jsonDefault.entrySet().each {entry ->

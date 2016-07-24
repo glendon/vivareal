@@ -10,7 +10,7 @@ environments:
     development:
         bootstrap:
             insert:
-                properties : false
+                properties : true
                 provinces : true
         grails:
             mongodb:

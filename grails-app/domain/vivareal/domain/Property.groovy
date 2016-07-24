@@ -1,6 +1,7 @@
 package vivareal.domain
 
 import grails.util.Environment
+import grails.converters.JSON
 
 class Property {
 
@@ -29,6 +30,23 @@ class Property {
         description nullable: true
     }
 
+    static {        
+        JSON.registerObjectMarshaller(Property) { Property p ->
+            return [
+                id: p.id,
+                x: p.x,
+                y: p.y,
+                title: p.title,
+                price: p.price,
+                description: p.description,
+                beds: p.beds,
+                baths: p.baths,
+                squareMeters: p.squareMeters,
+                provinces: p.provinces
+            ]
+        }
+    }
+
     static mapping = {
         if (Environment.current == Environment.TEST) {
             id generator : 'assigned' 
@@ -47,13 +65,13 @@ class Property {
         this.y = y
     }
 
-    def setProvinces(provincesParam) {
+    def addListProvinces(provincesParam) {
         if (!this.provinces) {
-            this.provinces = new ArrayList<Provincy>()
+            this.provinces = []
         }            
 
         provincesParam.each { provincy ->        
-            this.provinces.add(provincy.name)
+            this.provinces.add(provincy)
         }
     }
 }

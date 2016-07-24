@@ -28,7 +28,7 @@ class AreaManagerService {
         if (isAreaValid(property.x, property.y)){
             def provinces = provincesService.getProvinces(property.x, property.y)
                 
-            property.setProvinces(provinces)                    
+            property.addListProvinces(provinces)                    
         }else{                
             property.errors.reject("property.insert.invalid.area")
         }   

@@ -1,5 +1,7 @@
 package vivareal.domain
 
+import grails.converters.JSON
+
 class Provincy {
 
 	static mapWith = "mongo"
@@ -13,6 +15,14 @@ class Provincy {
 
 	static mapping = {
         id generator : 'increment'
+    }
+
+    static {        
+        JSON.registerObjectMarshaller(Provincy) { Provincy p ->
+            return [
+                name: p.name
+            ]
+        }
     }
 
 	def isAreaAvailable (paramX, paramY) {

@@ -1,6 +1,6 @@
 package vivareal.v1
 
-import grails.transaction.Transactional
+import org.springframework.transaction.annotation.Transactional
 import grails.rest.*
 import grails.converters.*
 import static org.springframework.http.HttpStatus.*
@@ -8,7 +8,7 @@ import static org.springframework.http.HttpMethod.*
 
 import vivareal.domain.Property
 
-@Transactional(readOnly = true)
+@Transactional
 class PropertyController extends RestfulController {
 
     def areaManagerService
@@ -30,12 +30,17 @@ class PropertyController extends RestfulController {
 
         log.info "PROPERTY >>> Executing HTTP GET"
         
+        def properties
+        def response
         if (ax != null && ay != null && bx != null && by != null) {
 
-            def properties = areaManagerService.getAllPropertysIn(ax, ay, bx, by)
-            respond properties
+            properties = areaManagerService.getAllPropertysIn(ax, ay, bx, by)
+            response = [foundProperties : properties.size(), properties : properties]
+            respond response
         }else{
-            respond Property.list()
+            properties = Property.list()
+            response = [foundProperties : properties.size(), properties : properties]
+            respond response
         }
 
         

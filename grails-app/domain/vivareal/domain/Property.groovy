@@ -32,6 +32,8 @@ class Property {
 
     static {        
         JSON.registerObjectMarshaller(Property) { Property p ->
+            p.tempList = provincesAsStringList(p.provinces)                                    
+             
             return [
                 id: p.id,
                 x: p.x,
@@ -42,9 +44,17 @@ class Property {
                 beds: p.beds,
                 baths: p.baths,
                 squareMeters: p.squareMeters,
-                provinces: p.provinces
+                provinces: p.tempList
             ]
         }
+    }
+
+    static def provincesAsStringList(provinces) {
+        def list = []
+        provinces.each { p ->
+            list.add(p.name)
+        }
+        list
     }
 
     static mapping = {

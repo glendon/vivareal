@@ -17,14 +17,6 @@ class Provincy {
         id generator : 'increment'
     }
 
-    static {        
-        JSON.registerObjectMarshaller(Provincy) { Provincy p ->
-            return [
-                name: p.name
-            ]
-        }
-    }
-
 	def isAreaAvailable (paramX, paramY) {
 		def properties = Property.where {(x == paramX && y == paramY)}.list()
 

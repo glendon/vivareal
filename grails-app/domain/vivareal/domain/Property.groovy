@@ -58,15 +58,10 @@ class Property {
     }
 
     static mapping = {
-        if (Environment.current == Environment.TEST) {
-            id generator : 'assigned' 
-        }else{
-            id generator : 'increment'
-        }
-        
+        id generator : 'increment'                
     }
 
-    Property(baths, beds, id, squareMeters, x, y) {
+    Property(baths, beds, squareMeters, x, y) {
         this.baths = baths
         this.beds = beds
         this.id = id

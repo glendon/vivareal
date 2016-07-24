@@ -37,9 +37,9 @@ class DataService {
 
     	if (insertProperties) {        
 
-            vivaRealIntegrationService.propertiesFromVivaReal().each{ propertyVivaReal ->
+            vivaRealIntegrationService.propertiesFromVivaReal().eachWithIndex{ propertyVivaReal, i ->
                 
-                propertyVivaReal.title = "Imóvel $propertyVivaReal.id"
+                propertyVivaReal.title = "Imóvel $i"
                 areaManagerService.createNew(propertyVivaReal)              
             }
 	    }

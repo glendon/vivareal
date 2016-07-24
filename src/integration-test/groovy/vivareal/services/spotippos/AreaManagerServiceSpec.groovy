@@ -12,9 +12,8 @@ class AreaManagerServiceSpec extends Specification {
 
     def areaManagerService
 
-    def setup() {
-        def tempProperty = new Property()
-        tempProperty.id = 9999
+    def setupSpec() {
+        def tempProperty = new Property()        
         tempProperty.title = "Property test x1399 y999"       
         tempProperty.beds = 1
         tempProperty.baths = 1
@@ -26,7 +25,7 @@ class AreaManagerServiceSpec extends Specification {
     }
 
     def cleanup() {
-        Property.where { id == 9999 }.deleteAll()
+        Property.where { title == "Property test x1399 y999" }.deleteAll()
     }
 
     void "test insert a new property and find it in search by area"(){
@@ -35,12 +34,12 @@ class AreaManagerServiceSpec extends Specification {
             def propertiesInArea = areaManagerService.getAllPropertysIn(1380, 999, 1399, 950)
 
             def properties = propertiesInArea.findAll { property ->
-                property.id == 9999
+                property.title = "Property test x1399 y999"
             }
 
         then: "verify if the property was found"  
             properties
-            properties[0].id == 9999   
+            properties[0].title == "Property test x1399 y999"  
         
     }
 
@@ -49,7 +48,7 @@ class AreaManagerServiceSpec extends Specification {
             def propertiesInArea = areaManagerService.getAllPropertysIn(1380, 997, 1397, 950)
 
             def properties = propertiesInArea.findAll { property ->
-                property.id == 9999
+                property.title == "Property test x1399 y999"
             }
         then : "can't be found"   
             properties.size() == 0
@@ -60,7 +59,7 @@ class AreaManagerServiceSpec extends Specification {
         when : "ask for properties in the whole area"
             def properties = areaManagerService.getAllPropertysIn(0, 1000, 14000, 0)
             
-        then : "verify if the quantity is 4001"
-            properties.size() == 4001
+        then : "verify if the quantity returned is the total of properties stored"
+            properties.size() == Property.list().size()
     }
 }

@@ -1,4 +1,4 @@
-package vivareal.v1
+package vivareal.controllers.v1
 
 import org.springframework.transaction.annotation.Transactional
 import grails.rest.*
@@ -78,6 +78,9 @@ class PropertyController extends RestfulController {
     def show (Long id) {
         log.info "PROPERTY >>> Geting the resource $id"
         def property = Property.findById(id)
+        println "Id quesisado $id"            
+        println property 
+        println property as grails.converters.JSON
 
         if (property) {
             respond property, [status : OK]

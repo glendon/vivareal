@@ -8,7 +8,7 @@ class PropertiesJson {
 	def properties
 
 	def createProperty(jsonProperty){
-		new Property(jsonProperty.baths, jsonProperty.beds, jsonProperty.id, jsonProperty.squareMeters, jsonProperty.x, jsonProperty.y)
+		new Property(jsonProperty.baths, jsonProperty.beds, jsonProperty.squareMeters, jsonProperty.x, jsonProperty.y)
 	}
 
 	def createProperties(){	

@@ -25,4 +25,15 @@ Como executar o projeto:
                 port: 27017
                 databaseName: "vivarealtest"
                 
-3 - Execute na raiz do projeto: grails run-app
+3 - Executar na raiz do projeto: grails run-app
+
+OBSERVAÇÃO ->>>
+No arquivo /grails-app/conf/application.yml as propriedades abaixo são usadas para dar carga de dados no MongoDB, portanto, deve ser utilizada apenas na primera execução (ou quando houver necessidade - por exemplo: se o banco for deletado).
+
+Na segunda execução, trocar os valores true para false
+
+
+    bootstrap:
+                insert:
+                    properties : true
+                    provinces : true

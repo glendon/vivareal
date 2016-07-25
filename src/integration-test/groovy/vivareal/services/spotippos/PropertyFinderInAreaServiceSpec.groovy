@@ -13,7 +13,7 @@ import vivareal.domain.Property
 
 class PropertyFinderInAreaServiceSpec extends Specification {
 
-	def propertyFinderInAreaService
+	/*def propertyFinderInAreaService
 	
     def setupSpec() {
 
@@ -72,5 +72,5 @@ class PropertyFinderInAreaServiceSpec extends Specification {
             
         then : "verify if the quantity returned is the total of properties stored"
             response.foundProperties == Property.list().size()
-    }
+    }*/
 }

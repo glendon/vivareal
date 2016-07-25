@@ -7,7 +7,7 @@ import vivareal.services.integration.VivaRealIntegrationService
 
 @TestFor(ProvincesService)
 class ProvincesServiceSpec extends Specification {
-  /*
+  
     def provincesService 
 
     def setup() {
@@ -43,5 +43,5 @@ class ProvincesServiceSpec extends Specification {
         provinces.size() == 2
         provinces[0].name == "Gode" || provinces[0].name == "Ruja"
         provinces[1].name == "Gode" || provinces[1].name == "Ruja"
-   	}   */ 
+   	}   
 }

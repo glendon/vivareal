@@ -12,8 +12,6 @@ class VivaRealIntegrationService {
     String provincesJsonUrl    
 
     def propertiesFromVivaReal() {
-        println "propertiesFromVivaReal: " + propertiesJsonUrl
-
         def jsonDefault = new groovy.json.JsonSlurper()
             .parseText(propertiesJsonUrl.toURL().text)
 
@@ -24,7 +22,6 @@ class VivaRealIntegrationService {
 
     def provincesFromVivaReal() {
     	def provinces =  []
-        println "provincesFromVivaReal: " + provincesJsonUrl
     	def jsonDefault = new groovy.json.JsonSlurper()
     		.parseText(provincesJsonUrl.toURL().text)
 

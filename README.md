@@ -10,6 +10,8 @@ Ambiente de desenvolvimento:
 ### INSTRUÇOES PARA RODAR "local" ou em um Container Docker.
 
 LOCAL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+
+
 Como executar o projeto:
 
 1 - Faça o clone desse projeto.
@@ -45,4 +47,5 @@ Na segunda execução, trocar os valores true para false
 DOCKER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 1 - docker pull glendonml/vivareal-challenge
+
 2 - docker run -it -p 8080:8080 glendonml/vivareal-challenge

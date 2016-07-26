@@ -7,7 +7,7 @@ Ambiente de desenvolvimento:
 - Groovy Version: 2.4.7
 - JVM Version: 1.8.0_102
 
-### INSTRUÇOES PARA RODAR "local" ou num Container Docker.
+### INSTRUÇOES PARA RODAR "local" ou em um Container Docker.
 
 LOCAL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
 Como executar o projeto:

@@ -7,6 +7,9 @@ Ambiente de desenvolvimento:
 - Groovy Version: 2.4.7
 - JVM Version: 1.8.0_102
 
+### INSTRUÇOES PARA RODAR "local" ou num Container Docker.
+
+LOCAL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
 Como executar o projeto:
 
 1 - Faça o clone desse projeto.
@@ -37,3 +40,9 @@ Na segunda execução, trocar os valores true para false
                 insert:
                     properties : true
                     provinces : true
+
+
+DOCKER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+1 - docker pull glendonml/vivareal-challenge
+2 - docker run -it -p 8080:8080 glendonml/vivareal-challenge
